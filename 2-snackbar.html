@@ -1,14 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+      integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
     
-  <script type="module" crossorigin src="/goit-js-hw-10/assets/modulepreload-polyfill-3cfb730f.js"></script>
-</head>
-<body>
-    <p><a href="./index.html">Go back</a></p>
+    <script type="module" crossorigin src="/goit-js-hw-10/commonHelpers2.js"></script>
+    <link rel="modulepreload" crossorigin href="/goit-js-hw-10/assets/modulepreload-polyfill-3cfb730f.js">
+    <link rel="modulepreload" crossorigin href="/goit-js-hw-10/assets/vendor-77e16229.js">
+    <link rel="stylesheet" href="/goit-js-hw-10/assets/vendor-7a007824.css">
+    <link rel="stylesheet" href="/goit-js-hw-10/assets/2-snackbar-81f0ba7a.css">
+  </head>
+  <body>
+    <p><a href="./index.html" class="back-link">Go back</a></p>
+
+    <form class="form">
+      <label class="form-label-delay">
+        Delay (ms)
+        <input type="number" name="delay" required class="form-input-delay"/>
+      </label>
+
+      <fieldset class="form-fieldset">
+        <legend class="form-legend">State</legend>
+        <label class="form-label-fullfilled">
+          <input type="radio" name="state" value="fulfilled" required class="form-input-fullfilled"/>
+          Fulfilled
+        </label>
+        <label class="form-label-rejected">
+          <input type="radio" name="state" value="rejected" required class="form-input-rejected"/>
+          Rejected
+        </label>
+      </fieldset>
+
+      <button type="submit" class="form-btn">Create notification</button>
+    </form>
+
     
-</body>
+  </body>
 </html>
