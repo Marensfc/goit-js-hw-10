@@ -7,10 +7,10 @@ import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 import iconClose from '../img/modal-close-btn.png';
 
-const inputTime = document.querySelector('input#datetime-picker');
-const button = document.querySelector('.btn-start');
+const inputTime = document.querySelector('#datetime-picker');
+const startButton = document.querySelector('.btn-start');
 const timeIndicators = document.querySelectorAll('span.value');
-button.setAttribute('disabled', 'disabled');
+startButton.setAttribute('disabled', 'disabled');
 
 let userSelectedDate;
 let timeDifference;
@@ -27,7 +27,7 @@ const izitoastOptions = {
   timeout: 3000,
 };
 
-flatpickr('input#datetime-picker', {
+flatpickr('#datetime-picker', {
   enableTime: true,
   time_24hr: true,
   defaultDate: new Date(),
@@ -35,19 +35,18 @@ flatpickr('input#datetime-picker', {
   onClose(selectedDates) {
     userSelectedDate = selectedDates[0];
     timeDifference = userSelectedDate - new Date();
+    console.log(timeDifference);
     checkUserDate();
   },
 });
 
 function checkUserDate() {
-  const isDateFuture = Math.sign(timeDifference);
-
-  if (isDateFuture !== -1) {
-    button.removeAttribute('disabled', 'disabled');
-    button.addEventListener('click', startTimer);
+  if (userSelectedDate > new Date()) {
+    startButton.removeAttribute('disabled', 'disabled');
+    startButton.addEventListener('click', startTimer);
   } else {
     iziToast.show(izitoastOptions);
-    button.setAttribute('disabled', 'disabled');
+    startButton.setAttribute('disabled', 'disabled');
   }
 }
 
@@ -66,26 +65,29 @@ function startTimer() {
       timeIndicators[i].textContent = convertedTime[i];
     }
 
-    if (timeDifference < 1000) {
+    if (timeDifference <= 0) {
       clearInterval(intervalID);
+      for (const indicator of timeIndicators) {
+        indicator.textContent = '00';
+      }
     }
   }, 1000);
 
-  button.setAttribute('disabled', 'disabled');
+  startButton.setAttribute('disabled', 'disabled');
   inputTime.setAttribute('disabled', 'disabled');
 }
 
 function convertMs(ms) {
+  // Number of milliseconds per unit of time
   const second = 1000;
   const minute = second * 60;
   const hour = minute * 60;
   const day = hour * 24;
 
-  const days = Math.floor(ms / day);
-  const hours = Math.floor((ms % day) / hour);
-  const minutes = Math.floor(((ms % day) % hour) / minute);
-  const seconds = Math.floor((((ms % day) % hour) % minute) / second);
+  const days = Math.floor(ms / day); // Remaining days
+  const hours = Math.floor((ms % day) / hour); // Remaining hours
+  const minutes = Math.floor(((ms % day) % hour) / minute); // Remaining minutes
+  const seconds = Math.floor((((ms % day) % hour) % minute) / second); // Remaining seconds
 
   return { days, hours, minutes, seconds };
 }
-
