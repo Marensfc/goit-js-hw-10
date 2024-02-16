@@ -24,18 +24,12 @@ function createPromise(evt) {
   };
 
   const notificationPromise = new Promise((resolve, reject) => {
-    // inputFullfilled.setAttribute('disabled', 'disabled');
-    // inputRejected.setAttribute('disabled', 'disabled');
-
     setTimeout(() => {
       if (inputFullfilled.checked) {
         resolve(delay);
       } else {
         reject(delay);
       }
-
-      // inputFullfilled.removeAttribute('disabled', 'disabled');
-      // inputRejected.removeAttribute('disabled', 'disabled');
     }, delay);
   });
 
